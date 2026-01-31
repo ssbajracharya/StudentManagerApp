@@ -15,11 +15,11 @@ namespace StudentManagerApp
             InitializeComponent();
         }
 
+
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
 
         }
-
         private void AddStudentForm_Load(object sender, EventArgs e)
         {
             comboMonth.DataSource = Enum.GetValues(typeof(MonthOfAdmission));
@@ -27,8 +27,26 @@ namespace StudentManagerApp
 
         private void btnSubmit_Click(object sender, EventArgs e)
         {
+            if (!int.TryParse(txtId.Text, out int id))
+            {
+                MessageBox.Show("Enter a valid number for Student ID");
+                return;
+            }
+
+            if (string.IsNullOrWhiteSpace(txtFirstName.Text) || string.IsNullOrWhiteSpace(txtLastName.Text))
+            {
+                MessageBox.Show("First Name and Last Name are required.");
+                return;
+            }
+            if (string.IsNullOrEmpty(comboGrade.Text))
+            {
+                MessageBox.Show("Please select a Grade.");
+                return;
+            }
+
+
             var newStudent = new Student();
-            newStudent.StudId = int.Parse(txtId.Text);
+            newStudent.StudId = id;
             newStudent.FirstName = txtFirstName.Text;
             newStudent.LastName = txtLastName.Text;
             newStudent.Address = txtAddress.Text;
@@ -39,9 +57,5 @@ namespace StudentManagerApp
             this.Close();
         }
 
-        private void textBox1_TextChanged_1(object sender, EventArgs e)
-        {
-
-        }
     }
 }

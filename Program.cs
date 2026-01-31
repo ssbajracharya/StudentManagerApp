@@ -32,8 +32,6 @@ namespace StudentManagerApp
                 Month = MonthOfAdmission.January,
                 Grade = 'B'
             });
-
-
             //Application.Run(new Form1());
             Application.Run(new MainForm());
         }
